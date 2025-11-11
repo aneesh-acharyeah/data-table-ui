@@ -1,0 +1,191 @@
+/* ===== Design tokens ===== */
+:root{
+  --bg: #0b0e12;
+  --bg-grad: radial-gradient(1200px 600px at 10% -10%, #0f1a2b 0%, transparent 60%),
+             radial-gradient(1200px 600px at 110% 10%, #0f1a2b 0%, transparent 55%),
+             linear-gradient(180deg, #0b0e12 0%, #0a0f1a 100%);
+  --panel: rgba(18, 23, 32, 0.85);
+  --muted: #a3adc2;
+  --text: #e8edf7;
+  --border: #1f2a3a;
+  --ring: #3a5bff;
+  --ring-2: rgba(58, 91, 255, .28);
+  --primary: #7ea2ff;
+  --primary-ink: #0b1220;
+  --accent: #22c55e;
+  --shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.02);
+}
+
+/* ===== Base ===== */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Inter", ui-sans-serif, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  background: var(--bg-grad), var(--bg);
+}
+
+/* Nice scrollbars */
+*{scrollbar-width: thin; scrollbar-color: #2b3a52 transparent}
+*::-webkit-scrollbar{height:10px;width:10px}
+*::-webkit-scrollbar-thumb{background:#2b3a52;border-radius:10px}
+*::-webkit-scrollbar-track{background:transparent}
+
+.container{
+  max-width:1100px;
+  margin:40px auto;
+  padding:0 18px 24px;
+}
+
+/* ===== Card shell ===== */
+.app-surface{
+  background: var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow);
+  overflow: clip;
+}
+
+/* ===== Header ===== */
+.header{
+  padding:22px 20px 14px;
+  border-bottom:1px solid #1a2331;
+  background:
+   linear-gradient(180deg, rgba(126,162,255,.12), transparent 45%),
+   radial-gradient(500px 120px at 0% 0%, rgba(126,162,255,.18), transparent 60%);
+}
+.header h1{
+  margin:0 0 6px;
+  letter-spacing:.2px;
+  font-weight:800;
+  font-size:26px;
+}
+.subtle{color:var(--muted)}
+
+/* ===== Toolbar ===== */
+.toolbar{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:14px 16px;
+}
+.control{
+  display:inline-flex;gap:8px;align-items:center;
+  border:1px solid var(--border);
+  padding:8px 10px;border-radius:12px;background:#0e1420;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
+}
+.control summary{cursor:pointer;outline:none}
+.control summary::-webkit-details-marker{display:none}
+.control[open]{box-shadow:0 0 0 2px var(--ring-2), inset 0 1px 0 rgba(255,255,255,.02)}
+
+.col-toggles{display:grid;gap:8px;margin-top:10px}
+.col-toggles label{display:flex;gap:8px;align-items:center;font-size:14px}
+
+.right{display:flex;gap:10px;align-items:center}
+#searchInput{
+  padding:12px 14px;border-radius:12px;border:1px solid var(--border);
+  background:#0f1624;color:var(--text);min-width:260px;outline:none;
+  transition:border .2s, box-shadow .2s, transform .06s ease;
+}
+#searchInput:focus{
+  border-color:var(--ring);
+  box-shadow:0 0 0 3px var(--ring-2);
+}
+
+/* ===== Buttons ===== */
+.btn{
+  padding:10px 12px;border:1px solid var(--border);border-radius:12px;
+  background:#101826;color:var(--text);cursor:pointer;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
+  transition: transform .06s ease, box-shadow .2s, background .2s, opacity .2s;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn-ghost{background:transparent}
+.btn.primary{
+  background:linear-gradient(180deg, #8fb1ff, #6f97ff);
+  color:var(--primary-ink);
+  border-color:transparent;
+  font-weight:700;
+  letter-spacing:.2px;
+}
+
+/* ===== Table ===== */
+.table-wrap{
+  border-top:1px solid #1a2331;
+  padding:16px;
+}
+.table-wrap .card{
+  background:#0c1220;border:1px solid var(--border);
+  border-radius:14px; overflow:auto; box-shadow: var(--shadow);
+}
+
+.grid{
+  width:100%;border-collapse:separate;border-spacing:0;min-width:900px;
+}
+.grid thead th{
+  position:sticky;top:0;z-index:1;
+  background:linear-gradient(180deg,#121a2a,#101826);
+  border-bottom:1px solid #1a2331;
+  font-weight:700;text-align:left;padding:14px 12px;white-space:nowrap;
+  letter-spacing:.2px;
+}
+.grid thead th.sortable{cursor:pointer}
+.grid thead th .sort{opacity:.6;margin-left:8px;font-size:12px}
+.grid thead th:hover{background:#151f33}
+
+.grid tbody tr{
+  transition: background .15s ease, transform .06s ease;
+}
+.grid tbody td{
+  padding:12px;border-bottom:1px solid #141c2a;
+}
+.grid tbody tr:nth-child(odd){background:#0d1422}
+.grid tbody tr:hover{background:#0f1b31;}
+
+/* Rounded corners for the table */
+.grid thead th:first-child{border-top-left-radius:12px}
+.grid thead th:last-child{border-top-right-radius:12px}
+.grid tbody tr:last-child td:first-child{border-bottom-left-radius:12px}
+.grid tbody tr:last-child td:last-child{border-bottom-right-radius:12px}
+
+/* Badges & highlights */
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;padding:3px 8px;border-radius:999px;border:1px solid var(--border);
+  background:#0f1930;color:var(--muted);
+}
+.badge::before{
+  content:"";width:6px;height:6px;border-radius:999px;background:#4ade80; /* green */
+  display:inline-block;
+}
+.badge[data-variant="Suspended"]::before{background:#f87171}
+.badge[data-variant="Pending"]::before{background:#fbbf24}
+.badge[data-variant="Invited"]::before{background:#60a5fa}
+
+mark{
+  background: rgba(126,162,255,.35);
+  padding:0 .18em;border-radius:4px;
+}
+
+/* ===== Footer / pager ===== */
+.table-footer{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;margin:6px 0 16px;
+  padding:0 16px 16px;
+}
+.status{font-size:14px;color:var(--muted)}
+
+.pager{display:flex;gap:8px;align-items:center}
+.page-list{display:flex;gap:8px;list-style:none;margin:0;padding:0}
+.page-list .page{
+  min-width:36px;height:36px;display:grid;place-items:center;
+  border:1px solid var(--border);border-radius:10px;background:#0f1626;cursor:pointer;
+  transition: transform .06s ease, background .2s, border-color .2s;
+}
+.page-list .page.active{
+  background:linear-gradient(180deg,#8fb1ff,#6f97ff);
+  color:#0b1220;border-color:transparent;font-weight:800;
+}
+.page-list .page:hover{transform:translateY(-1px)}
