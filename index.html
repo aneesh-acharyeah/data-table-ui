@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Data Table UI — JS</title>
+
+  <!-- Inter font for nicer typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="app-surface">
+      <header class="header">
+        <h1>Data Table UI</h1>
+        <p class="subtle">Sorting • Pagination • Global search • Column toggle • CSV export</p>
+      </header>
+
+      <section class="toolbar">
+        <div class="left">
+          <label class="control">
+            <span>Show</span>
+            <select id="pageSize">
+              <option>10</option><option>25</option><option>50</option><option>100</option>
+            </select>
+            <span>rows</span>
+          </label>
+
+          <details class="control">
+            <summary>Columns</summary>
+            <div id="colToggles" class="col-toggles"></div>
+          </details>
+
+          <button id="resetBtn" class="btn btn-ghost">Reset</button>
+        </div>
+
+        <div class="right">
+          <input id="searchInput" type="search" placeholder="Search…" aria-label="Search all columns" />
+          <button id="exportBtn" class="btn primary">Export CSV</button>
+        </div>
+      </section>
+
+      <div class="table-wrap">
+        <div class="card">
+          <table id="grid" class="grid" aria-describedby="tableStatus">
+            <thead>
+              <tr id="gridHead"></tr>
+            </thead>
+            <tbody id="gridBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer">
+        <div id="tableStatus" class="status subtle"></div>
+        <nav class="pager" aria-label="Pagination">
+          <button class="btn" id="firstBtn" title="First">«</button>
+          <button class="btn" id="prevBtn" title="Previous">‹</button>
+          <ul id="pageList" class="page-list"></ul>
+          <button class="btn" id="nextBtn" title="Next">›</button>
+          <button class="btn" id="lastBtn" title="Last">»</button>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
